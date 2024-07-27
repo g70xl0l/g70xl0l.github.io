@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n______s</title> <!-- Начальное название -->
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black; /* Черный фон для эффекта */
+        }
+        #dvd {
+            position: absolute;
+            width: 100px; /* Ширина гифки */
+            height: auto; /* Автоматическая высота */
+        }
+    </style>
+</head>
+<body>
+    <img id="dvd" src="https://media1.tenor.com/m/-qBsG1HwR4oAAAAC/cat-dance-dancing-cat.gif" alt="DVD Logo">
+    
+    <script>
+        const dvd = document.getElementById('dvd');
+        let posX = 0;
+        let posY = 0;
+        let speedX = 2; // Скорость по оси X
+        let speedY = 2; // Скорость по оси Y
+
+        function moveDVD() {
+            const windowWidth = window.innerWidth - dvd.offsetWidth;
+            const windowHeight = window.innerHeight - dvd.offsetHeight;
+
+            // Изменяем позицию
+            posX += speedX;
+            posY += speedY;
+
+            // Проверка на столкновение с краями
+            if (posX >= windowWidth || posX <= 0) {
+                speedX = -speedX; // Изменяем направление
+            }
+            if (posY >= windowHeight || posY <= 0) {
+                speedY = -speedY; // Изменяем направление
+            }
+
+            // Обновляем позицию гифки
+            dvd.style.left = posX + 'px';
+            dvd.style.top = posY + 'px';
+
+            requestAnimationFrame(moveDVD); // Запускаем следующий кадр анимации
+        }
+
+        moveDVD(); // Запускаем анимацию
+
+        // Смена названия сайта
+        const titles = ['n______s', 'ne____is', 'nem_sis', 'nemesis', 'n3m3s1s', 'n3mesi5'];
+        let currentTitleIndex = 0;
+
+        function changeTitle() {
+            document.title = titles[currentTitleIndex];
+            currentTitleIndex = (currentTitleIndex + 1) % titles.length; // Переход к следующему индексу
+        }
+
+        setInterval(changeTitle, 2000); // Меняем название каждые 2 секунды
+    </script>
+</body>
+</html>
